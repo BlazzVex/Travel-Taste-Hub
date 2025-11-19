@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ExploreAI - Temukan Tempat Impianmu</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-        
+
         * {
             margin: 0;
             padding: 0;
@@ -27,6 +28,7 @@
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -34,9 +36,12 @@
         }
 
         @keyframes pulse {
-            0%, 100% {
+
+            0%,
+            100% {
                 box-shadow: 0 10px 30px rgba(15, 143, 110, 0.5);
             }
+
             50% {
                 box-shadow: 0 10px 50px rgba(15, 143, 110, 0.8);
             }
@@ -46,15 +51,20 @@
             from {
                 transform: translateY(100%);
             }
+
             to {
                 transform: translateY(0);
             }
         }
 
         @keyframes typing {
-            0%, 60%, 100% {
+
+            0%,
+            60%,
+            100% {
                 transform: translateY(0);
             }
+
             30% {
                 transform: translateY(-10px);
             }
@@ -64,6 +74,7 @@
             from {
                 opacity: 0;
             }
+
             to {
                 opacity: 1;
             }
@@ -74,6 +85,7 @@
                 transform: scale(0.8);
                 opacity: 0;
             }
+
             to {
                 transform: scale(1);
                 opacity: 1;
@@ -84,6 +96,7 @@
             0% {
                 background-position: -1000px 0;
             }
+
             100% {
                 background-position: 1000px 0;
             }
@@ -746,6 +759,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Header -->
     <header class="header">
@@ -788,7 +802,8 @@
                 </div>
                 <div class="filter-group">
                     <label>Budget: <span class="range-value" id="budgetValue">Rp 1.000.000</span></label>
-                    <input type="range" id="budgetSlider" min="10000" max="1000000" step="10000" value="1000000" onchange="updateFilters()">
+                    <input type="range" id="budgetSlider" min="10000" max="1000000" step="10000" value="1000000"
+                        onchange="updateFilters()">
                 </div>
             </div>
         </div>
@@ -976,7 +991,345 @@
                 description: "Pusat wellness dengan yoga dan meditasi",
                 openHours: "07:00-20:00",
                 services: ["Yoga", "Meditation", "Massage"]
-            }
+            },
+            {
+    id: 17,
+    name: "Monumen Simpang Lima Gumul",
+    category: "tourism",
+    lat: -7.9265,
+    lng: 112.0976,
+    price: 0,
+    rating: 4.7,
+    image: "",  
+    description: "Monumen ikonik berbentuk seperti Arc de Triomphe di Kediri",  
+    openHours: "24:00-24:00",
+    services: ["Photo Spot", "Landmark"]
+  },
+  {
+    id: 18,
+    name: "Gua Selomangleng",
+    category: "tourism",
+    lat: -7.8440,
+    lng: 112.0060,
+    price: 5000,
+    rating: 4.5,
+    image: "",
+    description: "Gua bersejarah dengan relief dan mitos lokal",  
+    openHours: "24:00-24:00",
+    services: ["Exploration", "Photography"]
+  },
+  {
+    id: 19,
+    name: "Museum Airlangga Kediri",
+    category: "tourism",
+    lat: -7.8435,
+    lng: 112.0095,
+    price: 3000,
+    rating: 4.4,
+    image: "",
+    description: "Museum sejarah Kerajaan Kediri",  
+    openHours: "09:00-16:00",
+    services: ["Museum", "Edukasi"]
+  },
+  {
+    id: 20,
+    name: "Desa Wisata Sempu",
+    category: "tourism",
+    lat: -7.9300,
+    lng: 112.1000,
+    price: 12000,
+    rating: 4.6,
+    image: "",
+    description: "Desa wisata di lereng Gunung Kelud dengan Kampoeng Anggrek dan Kampung Indian",  
+    openHours: "08:00-17:00",
+    services: ["Trek", "Edukasi", "Kebun"]
+  },
+  {
+    id: 21,
+    name: "Kampoeng Anggrek Sempu",
+    category: "tourism",
+    lat: -7.9310,
+    lng: 112.0980,
+    price: 10000,
+    rating: 4.5,
+    image: "",
+    description: "Kebun anggrek di Desa Sempu",  
+    openHours: "08:00-15:00",
+    services: ["Taman Bunga", "Belanja Tanaman"]
+  },
+  {
+    id: 22,
+    name: "Gunung Maskumambang",
+    category: "tourism",
+    lat: -7.8445,
+    lng: 112.0150,
+    price: 0,
+    rating: 4.3,
+    image: "",
+    description: "Gunung kecil yang cocok untuk pendakian ringan",  
+    openHours: "08:00-16:00",
+    services: ["Trekking", "View Point"]
+  },
+  {
+    id: 23,
+    name: "Candi Surowono",
+    category: "tourism",
+    lat: -7.9500,
+    lng: 112.0500,
+    price: 5000,
+    rating: 4.2,
+    image: "",
+    description: "Kompleks candi Hindu kuno di Kediri",  
+    openHours: "07:00-20:00",
+    services: ["Sejarah", "Arkeologi"]
+  },
+  {
+    id: 24,
+    name: "Kediri Water Park (Gumul Paradise Island)",
+    category: "tourism",
+    lat: -7.9230,
+    lng: 112.0950,
+    price: 50000,
+    rating: 4.6,
+    image: "",
+    description: "Waterpark besar di dekat Simpang Lima Gumul",  
+    openHours: "09:00-17:00",
+    services: ["Wahana Air", "Kolam", "Rekreasi Keluarga"]
+  },
+  {
+    id: 25,
+    name: "Air Terjun Ngleyangan",
+    category: "tourism",
+    lat: -7.8500,
+    lng: 112.3000,
+    price: 0,
+    rating: 4.5,
+    image: "",
+    description: "Air terjun alam di area hutan Kediri",  
+    openHours: "08:00-17:00",
+    services: ["Trekking", "Camping"]
+  },
+  {
+    id: 26,
+    name: "Sumber Ubalan",
+    category: "tourism",
+    lat: -7.9000,
+    lng: 112.1200,
+    price: 4000,
+    rating: 4.4,
+    image: "",
+    description: "Hutan lindung dengan kolam dan area sepeda air",  
+    openHours: "07:00-17:00",
+    services: ["Sepeda Air", "Memancing", "Foto"]
+  },
+  {
+    id: 27,
+    name: "Bukit Gandrung Tanggulasi Medowo",
+    category: "tourism",
+    lat: -7.9700,
+    lng: 112.0500,
+    price: 10000,
+    rating: 4.5,
+    image: "",
+    description: "Bukit dengan pemandangan alam yang hijau dan sejuk",  
+    openHours: "08:00-17:00",
+    services: ["Trekking", "View Point"]
+  },
+  {
+    id: 28,
+    name: "Taman Tirtoyoso (Tirtoyoso Park)",
+    category: "tourism",
+    lat: -7.8600,
+    lng: 112.0200,
+    price: 20000,
+    rating: 4.5,
+    image: "",
+    description: "Taman wisata keluarga dengan kolam dan wahana air",  
+    openHours: "06:00-18:00",
+    services: ["Kolam Renang", "Taman Bermain"]
+  },
+  {
+    id: 29,
+    name: "Gumul Photo Museum",
+    category: "tourism",
+    lat: -7.9250,
+    lng: 112.0980,
+    price: 50000,
+    rating: 4.3,
+    image: "",
+    description: "Museum fotografi dan sejarah kota Kediri",  
+    openHours: "10:00-17:00",
+    services: ["Museum", "Galeri Foto"]
+  },
+  {
+    id: 30,
+    name: "House of Riverside Kediri",
+    category: "tourism",
+    lat: -7.8000,
+    lng: 112.2000,
+    price: 0,
+    rating: 4.5,
+    image: "",
+    description: "Tempat kuliner tepi sungai dengan gazebo dan pemandangan alam",  
+    openHours: "10:00-22:00",
+    services: ["Kuliner", "Foto Spot"]
+  },
+  {
+    id: 31,
+    name: "Wisata Dunia Candy",
+    category: "tourism",
+    lat: -7.8100,
+    lng: 112.2100,
+    price: 0,
+    rating: 4.4,
+    image: "",
+    description: "Tempat wisata anak dengan pabrik permen dan wahana lucu",  
+    openHours: "09:00-17:00",
+    services: ["Wahana Anak", "Pabrik Permen", "Foto"]
+  },
+  {
+    id: 32,
+    name: "Korea Fantasy Kediri",
+    category: "tourism",
+    lat: -7.9300,
+    lng: 112.0950,
+    price: 30000,
+    rating: 4.4,
+    image: "",
+    description: "Wisata bertema Korea ala taman hiburan mini di Kediri",  
+    openHours: "10:00-20:00",
+    services: ["Spot Foto", "Taman Tema"]
+  },
+  {
+    id: 33,
+    name: "Alun-Alun Kota Kediri",
+    category: "tourism",
+    lat: -7.8390,
+    lng: 112.0070,
+    price: 0,
+    rating: 4.6,
+    image: "",
+    description: "Alun-alun kota untuk bersantai dan piknik",  
+    openHours: "24:00-24:00",
+    services: ["Taman", "Relaksasi"]
+  },
+  {
+    id: 34,
+    name: "Taman Ngronggo Kediri",
+    category: "tourism",
+    lat: -7.8400,
+    lng: 112.0100,
+    price: 0,
+    rating: 4.4,
+    image: "",
+    description: "Taman kota dengan fasilitas bermain anak",  
+    openHours: "24:00-24:00",
+    services: ["Playground", "Taman Hijau"]
+  },
+  {
+    id: 35,
+    name: "Taman Hutan Joyoboyo Kediri",
+    category: "tourism",
+    lat: -7.8500,
+    lng: 112.0200,
+    price: 0,
+    rating: 4.5,
+    image: "",
+    description: "Hutan kota untuk kayak jogging atau bersantai",  
+    openHours: "24:00-24:00",
+    services: ["Jogging", "Bersepeda", "Taman"]
+  },
+  {
+    id: 36,
+    name: "Soto Podjok Kediri",
+    category: "food",
+    lat: -7.8400,
+    lng: 112.0050,
+    price: 25000,
+    rating: 4.7,
+    image: "",
+    description: "Soto legendaris Kediri di Jl. Dhoho",  
+    openHours: "07:00-20:30",
+    services: ["Soto"]
+  },
+  {
+    id: 37,
+    name: "Nasi Pecel Mbah Darmo 1",
+    category: "food",
+    lat: -7.8380,
+    lng: 112.0060,
+    price: 20000,
+    rating: 4.6,
+    image: "",
+    description: "Nasi pecel legendaris Kediri",  
+    openHours: "05:00-11:00",
+    services: ["Pecel", "Nasi Campur"]
+  },
+  {
+    id: 38,
+    name: "Jaguar Cafe & Resto Kediri",
+    category: "food",
+    lat: -7.9000,
+    lng: 112.1000,
+    price: 60000,
+    rating: 4.5,
+    image: "",
+    description: "Cafe & resto nyaman di Kediri dengan menu beragam",  
+    openHours: "10:00-21:00",
+    services: ["Cafe", "Restoran"]
+  },
+  {
+    id: 39,
+    name: "Nasi Goreng Kuah Bang Tommy",
+    category: "food",
+    lat: -7.8395,
+    lng: 112.0035,
+    price: 30000,
+    rating: 4.4,
+    image: "",
+    description: "Nasi goreng khas Kediri dengan kuah unik",  
+    openHours: "18:00-22:00",
+    services: ["Nasi Goreng"]
+  },
+  {
+    id: 40,
+    name: "Mie Erlangga II",
+    category: "food",
+    lat: -7.8390,
+    lng: 112.0020,
+    price: 30000,
+    rating: 4.3,
+    image: "",
+    description: "Mie dan Chinese food autentik di Kediri",  
+    openHours: "11:00-21:00",
+    services: ["Mie", "Capcay", "Dimsum"]
+  },
+  {
+    id: 41,
+    name: "Tempat Bercakap Kopi Kediri",
+    category: "food",
+    lat: -7.9250,
+    lng: 112.0980,
+    price: 30000,
+    rating: 4.8,
+    image: "",
+    description: "Kafe modern di Kediri cocok untuk nongkrong",  
+    openHours: "10:00-22:00",
+    services: ["Kopi", "Dessert"]
+  },
+  {
+    id: 42,
+    name: "Mata Hati Cafe",
+    category: "food",
+    lat: -7.8430,
+    lng: 112.0100,
+    price: 40000,
+    rating: 4.5,
+    image: "",
+    description: "Cafe instagramable di Kediri dengan menu unik seperti avocado coffee",  
+    openHours: "09:00-22:00",
+    services: ["Cafe", "Coffee", "Dessert"]
+  }
         ];
 
         // Global State
@@ -990,7 +1343,7 @@
         };
 
         // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             getUserLocation();
             loadFavorites();
         });
@@ -1022,10 +1375,10 @@
             const R = 6371;
             const dLat = (lat2 - lat1) * Math.PI / 180;
             const dLon = (lon2 - lon1) * Math.PI / 180;
-            const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-                      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-                      Math.sin(dLon/2) * Math.sin(dLon/2);
-            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
             return R * c;
         }
 
@@ -1081,9 +1434,9 @@
             emptyState.style.display = 'none';
             grid.innerHTML = filteredPlaces.map(place => {
                 const isFav = favorites.includes(place.id);
-                const categoryEmoji = place.category === 'spa' ? '💆 Spa' : 
-                                     place.category === 'food' ? '🍽️ Kuliner' : '🏞️ Wisata';
-                
+                const categoryEmoji = place.category === 'spa' ? '💆 Spa' :
+                    place.category === 'food' ? '🍽️ Kuliner' : '🏞️ Wisata';
+
                 return `
                     <div class="place-card" onclick="openModal(${place.id})">
                         <div class="card-image" style="background-image: url('${place.image}')">
@@ -1137,8 +1490,8 @@
             document.getElementById('modalPrice').textContent = 'Rp ' + place.price.toLocaleString('id-ID');
             document.getElementById('modalHours').textContent = place.openHours;
             document.getElementById('modalHeader').style.backgroundImage = `url('${place.image}')`;
-            
-            document.getElementById('modalServices').innerHTML = place.services.map(service => 
+
+            document.getElementById('modalServices').innerHTML = place.services.map(service =>
                 `<span class="service-tag">${service}</span>`
             ).join('');
 
@@ -1172,23 +1525,66 @@
 
             toggleAIPanel();
             const prompt = moodPrompts[mood];
-            
+
             addAIMessage('user', prompt);
             callGeminiAPI(prompt);
         }
 
-        // Add AI Message
+        // Anda akan memerlukan pustaka Markdown-to-HTML, seperti 'marked.js'
+        // atau implementasi parser Markdown yang Anda buat sendiri.
+        // Contoh pseudocode untuk fungsi konversi:
+
+        /**
+         * Mengubah teks dengan sintaksis Markdown menjadi string HTML.
+         * (Dalam implementasi nyata, fungsi ini akan mengintegrasikan pustaka seperti marked.js)
+         * @param {string} markdownText - Teks input dalam format Markdown.
+         * @returns {string} - Teks yang dikonversi dalam format HTML.
+         */
+        function markdownToHtml(markdownText) {
+            // --- Implementasi Sederhana/Dasar (Tidak Lengkap) ---
+            let htmlText = markdownText;
+
+            // Ganti Header (e.g., ## Heading -> <h2>Heading</h2>)
+            htmlText = htmlText.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+            htmlText = htmlText.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+
+            // Ganti Bold (**text** -> <strong>text</strong>)
+            htmlText = htmlText.replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>');
+
+            // Ganti Bullet Points (* Item -> <ul><li>Item</li>...</ul>)
+            // Implementasi yang lebih kompleks diperlukan untuk daftar
+            const listRegex = /^\* (.*)$/gim;
+            if (listRegex.test(htmlText)) {
+                // Ini sangat sederhana, parser yang lebih baik akan dibutuhkan
+                let listItems = htmlText.match(listRegex);
+                htmlText = htmlText.replace(listRegex, '<li>$1</li>');
+                htmlText = `<ul>${htmlText}</ul>`;
+            }
+
+            // Ganti Line Breaks (\n\n -> <p>)
+            htmlText = htmlText.replace(/\n\n/g, '</p><p>');
+
+            // --- Akhir Implementasi Sederhana ---
+            return `<p>${htmlText}</p>`;
+        }
+
+        // Fungsi addAIMessage yang Diperbarui
         function addAIMessage(role, content) {
             const messagesDiv = document.getElementById('aiMessages');
-            
-            // Remove welcome message if exists
+
+            // Hapus pesan sambutan jika ada
             if (messagesDiv.children[0] && messagesDiv.children[0].style.textAlign === 'center') {
                 messagesDiv.innerHTML = '';
             }
 
             const messageDiv = document.createElement('div');
             messageDiv.className = `ai-message ${role}`;
-            messageDiv.textContent = content;
+
+            // **PERUBAHAN KUNCI:**
+            // 1. Panggil fungsi konversi Markdown.
+            // 2. Gunakan innerHTML, BUKAN textContent, untuk merender tag HTML.
+            messageDiv.innerHTML = markdownToHtml(content);
+
             messagesDiv.appendChild(messageDiv);
             messagesDiv.scrollTop = messagesDiv.scrollHeight;
         }
@@ -1213,14 +1609,14 @@
         // Call Gemini API
         async function callGeminiAPI(prompt) {
             showTypingIndicator();
-            
+
             const apiKey = 'AIzaSyCWJosTo2BHq3bwUUglmJyzBT4SSXU9ciI'; // Ganti dengan API key Anda
-            
+
             const contextData = filteredPlaces.slice(0, 10).map(p => {
                 const cat = p.category === 'spa' ? 'Spa' : p.category === 'food' ? 'Makanan' : 'Wisata';
                 return `${p.name} (${cat}, ${p.distance.toFixed(1)}km, Rp${p.price.toLocaleString('id-ID')}, Rating: ${p.rating})`;
             }).join(', ');
-            
+
             const systemContext = `Kamu adalah asisten wisata lokal. Data tempat tersedia: ${contextData}. Budget user: Rp${currentFilters.budget.toLocaleString('id-ID')}. Radius: ${currentFilters.radius}km. Berikan rekomendasi ramah dalam bahasa Indonesia dengan penjelasan singkat mengapa cocok.`;
 
             try {
@@ -1236,18 +1632,18 @@
 
                 const data = await response.json();
                 const aiResponse = data.candidates?.[0]?.content?.parts?.[0]?.text || 'Maaf, tidak bisa memproses permintaan.';
-                
+
                 removeTypingIndicator();
                 addAIMessage('assistant', aiResponse);
             } catch (error) {
                 console.error('Gemini API Error:', error);
-                
+
                 // Demo response
                 const demoText = filteredPlaces.slice(0, 3).map((p, i) => {
                     const cat = p.category === 'spa' ? 'Spa' : p.category === 'food' ? 'Makanan' : 'Wisata';
-                    return `${i+1}. ${p.name}\n- Kategori: ${cat}\n- Jarak: ${p.distance.toFixed(1)} km\n- Harga: Rp ${p.price.toLocaleString('id-ID')}\n- Rating: ${p.rating}/5\n\n${p.description}`;
+                    return `${i + 1}. ${p.name}\n- Kategori: ${cat}\n- Jarak: ${p.distance.toFixed(1)} km\n- Harga: Rp ${p.price.toLocaleString('id-ID')}\n- Rating: ${p.rating}/5\n\n${p.description}`;
                 }).join('\n\n');
-                
+
                 removeTypingIndicator();
                 addAIMessage('assistant', `Maaf, terjadi kesalahan API. Pastikan API key Gemini sudah diisi dengan benar.\n\nSebagai demo, berikut rekomendasi berdasarkan filter Anda:\n\n${demoText}`);
             }
@@ -1257,12 +1653,12 @@
         function handleAISubmit() {
             const input = document.getElementById('aiInput');
             const message = input.value.trim();
-            
+
             if (!message) return;
-            
+
             addAIMessage('user', message);
             input.value = '';
-            
+
             callGeminiAPI(message);
         }
 
@@ -1274,7 +1670,7 @@
         }
 
         // Close modal on ESC key
-        document.addEventListener('keydown', function(event) {
+        document.addEventListener('keydown', function (event) {
             if (event.key === 'Escape') {
                 closeModal();
                 if (document.getElementById('aiPanel').classList.contains('active')) {
@@ -1284,4 +1680,5 @@
         });
     </script>
 </body>
+
 </html>
