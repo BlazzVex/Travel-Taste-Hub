@@ -879,7 +879,7 @@
                     <div class="services-list" id="modalServices"></div>
                 </div>
                 <a href="#" class="btn-primary" id="modalMailto">
-                    📧 Minta Penawaran Harga
+                    📧 Cari di Google
                 </a>
             </div>
         </div>
@@ -1482,28 +1482,47 @@
         }
 
         // Open Modal
-        function openModal(placeId) {
-            const place = filteredPlaces.find(p => p.id === placeId);
-            if (!place) return;
+    function openModal(placeId) {
+        const place = filteredPlaces.find(p => p.id === placeId);
+        if (!place) return;
 
-            document.getElementById('modalTitle').textContent = place.name;
-            document.getElementById('modalRating').textContent = place.rating + '/5';
-            document.getElementById('modalDesc').textContent = place.description;
-            document.getElementById('modalDistance').textContent = place.distance.toFixed(2) + ' km dari lokasi Anda';
-            document.getElementById('modalPrice').textContent = 'Rp ' + place.price.toLocaleString('id-ID');
-            document.getElementById('modalHours').textContent = place.openHours;
-            document.getElementById('modalHeader').style.backgroundImage = `url('${place.image}')`;
+        // Update konten Modal seperti biasa
+        document.getElementById('modalTitle').textContent = place.name;
+        document.getElementById('modalRating').textContent = place.rating + '/5';
+        document.getElementById('modalDesc').textContent = place.description;
+        document.getElementById('modalDistance').textContent = place.distance.toFixed(2) + ' km dari lokasi Anda';
+        document.getElementById('modalPrice').textContent = 'Rp ' + place.price.toLocaleString('id-ID');
+        document.getElementById('modalHours').textContent = place.openHours;
+        document.getElementById('modalHeader').style.backgroundImage = `url('${place.image}')`;
 
-            document.getElementById('modalServices').innerHTML = place.services.map(service =>
-                `<span class="service-tag">${service}</span>`
-            ).join('');
+        document.getElementById('modalServices').innerHTML = place.services.map(service =>
+            `<span class="service-tag">${service}</span>`
+        ).join('');
 
-            const mailtoLink = `mailto:?subject=Inquiry tentang ${place.name}&body=Halo, saya tertarik dengan ${place.name}. Bisa minta informasi detail dan harga paket?`;
-            document.getElementById('modalMailto').href = mailtoLink;
+        // --- PERUBAHAN: FUNGSI CARI DI GOOGLE ---
+        
+        // 1. Ambil elemen tombol (ID-nya masih 'modalMailto' dari HTML lama)
+        const actionBtn = document.getElementById('modalMailto');
 
-            document.getElementById('modalOverlay').classList.add('active');
-        }
+        // 2. Buat URL Pencarian Google
+        // Kita tambahkan kata "Kediri" agar pencarian lebih akurat
+        const searchQuery = encodeURIComponent(`${place.name} Kediri`);
+        const googleUrl = `https://www.google.com/search?q=${searchQuery}`;
 
+        // 3. Ubah Link (Href)
+        actionBtn.href = googleUrl;
+
+        // 4. Ubah Tampilan Tombol (Ikon & Teks)
+        // Sebelumnya: 📧 Minta Penawaran Harga
+        actionBtn.innerHTML = '🔍 Cari di Google';
+        
+        // 5. Buka di Tab Baru
+        actionBtn.target = "_blank"; 
+        actionBtn.rel = "noopener noreferrer"; // Praktik keamanan yang baik
+
+        // Tampilkan Modal
+        document.getElementById('modalOverlay').classList.add('active');
+    }
         // Close Modal
         function closeModal(event) {
             if (event && event.target !== document.getElementById('modalOverlay')) return;
