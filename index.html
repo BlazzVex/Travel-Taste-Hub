@@ -186,7 +186,7 @@
             box-shadow: 0 10px 30px rgba(15, 143, 110, 0.3);
         }
 
-        /* Filters & Search */
+        /* Filters */
         .filters {
             background: rgba(28, 58, 48, 0.5);
             backdrop-filter: blur(20px);
@@ -198,51 +198,10 @@
             animation: fadeInUp 0.8s 0.6s both;
         }
 
-        /* Search Bar Styles */
-        .search-container {
-            margin-bottom: 2rem;
-            position: relative;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .search-icon-wrapper {
-            position: absolute;
-            left: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #0F8F6E;
-            font-size: 1.2rem;
-            pointer-events: none;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 1rem 1rem 1rem 3rem;
-            background: rgba(10, 30, 22, 0.8);
-            border: 2px solid #0F8F6E;
-            border-radius: 50px;
-            color: #CFFFE0;
-            font-size: 1.1rem;
-            transition: all 0.3s;
-        }
-
-        .search-input:focus {
-            outline: none;
-            box-shadow: 0 0 15px rgba(15, 143, 110, 0.3);
-            background: rgba(10, 30, 22, 0.95);
-        }
-
-        .search-input::placeholder {
-            color: rgba(207, 255, 224, 0.5);
-        }
-
         .filter-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
-            margin-top: 2rem;
         }
 
         .filter-group {
@@ -761,6 +720,43 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* Loading skeleton */
+        .skeleton-card {
+            background: rgba(28, 58, 48, 0.5);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(15, 143, 110, 0.2);
+        }
+
+        .skeleton-img {
+            height: 200px;
+            background: linear-gradient(90deg, rgba(28, 58, 48, 0.5) 0%, rgba(15, 143, 110, 0.2) 50%, rgba(28, 58, 48, 0.5) 100%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+
+        .skeleton-content {
+            padding: 1.5rem;
+        }
+
+        .skeleton-line {
+            height: 12px;
+            background: linear-gradient(90deg, rgba(28, 58, 48, 0.5) 0%, rgba(15, 143, 110, 0.2) 50%, rgba(28, 58, 48, 0.5) 100%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+        }
+
+        .skeleton-title {
+            height: 20px;
+            width: 70%;
+        }
+
+        .skeleton-short {
+            width: 50%;
+        }
     </style>
 </head>
 
@@ -786,13 +782,6 @@
         </div>
 
         <div class="filters">
-            <div class="search-container">
-                <div class="search-icon-wrapper">
-                    <span>🔍</span>
-                </div>
-                <input type="text" id="searchInput" class="search-input" placeholder="Cari nama tempat atau aktivitas..." oninput="handleSearch(this.value)">
-            </div>
-
             <div class="filter-grid">
                 <div class="filter-group">
                     <label>Radius: <span class="range-value" id="radiusValue">10 km</span></label>
@@ -821,7 +810,7 @@
     <div class="empty-state" id="emptyState" style="display: none;">
         <div style="font-size: 4rem; margin-bottom: 1rem;">📍</div>
         <h3>Tidak ada tempat yang sesuai</h3>
-        <p>Coba kata kunci lain, perluas radius pencarian, atau tingkatkan budget Anda</p>
+        <p>Coba perluas radius pencarian atau tingkatkan budget Anda</p>
     </div>
 
     <button class="ai-chat-btn" onclick="toggleAIPanel()">
@@ -888,6 +877,7 @@
     </div>
 
     <script>
+        // cek
         // Sample Places Data
         const places = [
             {
@@ -995,6 +985,110 @@
                 services: ["Yoga", "Meditation", "Massage"]
             },
             {
+                id: 9,
+                name: "Gunung Kelud",
+                category: "tourism",
+                lat: -7.9300,
+                lng: 112.3000,
+                price: 15000,
+                rating: 4.5,
+                image: "https://images.unsplash.com/photo-1560759223-999330a13809?w=400",
+                description: "Pendakian ringan dengan pemandangan kawah yang indah",
+                openHours: "24 Jam",
+                services: ["Hiking", "Photography", "Sunrise View"]
+            },
+            {
+                id: 10,
+                name: "Bakso Malang Pak Jaya",
+                category: "food",
+                lat: -7.8730,
+                lng: 112.0110,
+                price: 20000,
+                rating: 4.4,
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx5mF4Z2i0R8gP7XQ1I9nE_yF8V2A_8-9rFw&s",
+                description: "Bakso malang legendaris dengan kuah kaldu sapi kental",
+                openHours: "10:00-21:00",
+                services: ["Bakso Urat", "Bakso Telur", "Es Campur"]
+            },
+            {
+                id: 11,
+                name: "The Healing Hand Reflexology",
+                category: "spa",
+                lat: -7.8760,
+                lng: 112.0150,
+                price: 100000,
+                rating: 4.7,
+                image: "https://images.unsplash.com/photo-1519702202685-645391d8481c?w=400",
+                description: "Refleksi dan pijat kaki profesional",
+                openHours: "11:00-20:00",
+                services: ["Foot Reflexology", "Head Massage", "Acupressure"]
+            },
+            {
+                id: 12,
+                name: "Museum Angkut",
+                category: "tourism",
+                lat: -7.8700,
+                lng: 112.0500,
+                price: 75000,
+                rating: 4.8,
+                image: "https://images.unsplash.com/photo-1514755106263-d142514742a0?w=400",
+                description: "Museum transportasi terbesar di Asia Tenggara",
+                openHours: "12:00-20:00",
+                services: ["Photo Booth", "Theme Park", "Food Court"]
+            },
+            {
+                id: 13,
+                name: "Pondok Wisata Jatim Park 2",
+                category: "tourism",
+                lat: -7.8800,
+                lng: 112.0400,
+                price: 100000,
+                rating: 4.7,
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6sV2qX-t0t1e-B-Pq0x5r6w2Qd7K4s9Y4jQ&s",
+                description: "Taman rekreasi edukatif dengan Batu Secret Zoo dan Museum Satwa",
+                openHours: "08:30-16:30",
+                services: ["Zoo", "Museum", "Roller Coaster"]
+            },
+            {
+                id: 14,
+                name: "The Pijat House",
+                category: "spa",
+                lat: -7.8780,
+                lng: 112.0130,
+                price: 90000,
+                rating: 4.5,
+                image: "https://images.unsplash.com/photo-1574972288330-8d5910a76a5b?w=400",
+                description: "Tempat pijat keluarga yang nyaman dan terjangkau",
+                openHours: "10:00-21:00",
+                services: ["Traditional Massage", "Kerokan", "Hot Ginger Tea"]
+            },
+            {
+                id: 15,
+                name: "Soto Ayam Cak Har",
+                category: "food",
+                lat: -7.8690,
+                lng: 112.0100,
+                price: 25000,
+                rating: 4.8,
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1vOq4I7hL0d7D_N7-1b-d1H8F6k9G5h5t-A&s",
+                description: "Soto ayam dengan bumbu khas Jawa Timur, terkenal se-Nusantara",
+                openHours: "07:00-15:00",
+                services: ["Soto Ayam", "Jeruk Hangat", "Krupuk Udang"]
+            },
+            {
+                id: 16,
+                name: "Alun-Alun Kota",
+                category: "tourism",
+                lat: -7.8850,
+                lng: 112.0150,
+                price: 0,
+                rating: 4.4,
+                image: "https://images.unsplash.com/photo-1594247814801-1b2d0b6b0c2a?w=400",
+                description: "Pusat kota yang ramai, cocok untuk bersantai dan kuliner malam",
+                openHours: "24 Jam",
+                services: ["Selfie Spot", "Street Food", "Free Wifi"]
+            },
+            {
                 id: 17,
                 name: "Monumen Simpang Lima Gumul",
                 category: "tourism",
@@ -1002,4 +1096,420 @@
                 lng: 112.0976,
                 price: 0,
                 rating: 4.7,
-                image: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxISEhUTEhIWFRUVFRUVFRcXGBUVFhUXFhUWGBcVFxgYHSggGBolHRYVITEhJSkrLi4uFx8zODMtNygtLi0BCgoKDg0OGxAQGy0lHyU3LS0tKy4tLS0tLS0tKy0tLS0tLy0tLS0tLS0tLSstLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIAKgBLAMBIgACEQEDEQH/xAAbAAABBQEBAAAAAAAAAAAAAAACAAEDBQYEB//EAEUQAAEDAgMEB6YIBAQGAwAAAAEAAhEDIQQSMQVBUWEGEyIycZFCUoGhsdEUI1OTwdLh8BUzYpIWouPxByRygtPiQ3Oy/8QAGgEAAgMBAQAAAAAAAAAAAAAAAAECAwUEBv/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A
+                image: "data:image/jpeg;base64,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",
+                description: "Monumen ikonik yang menyerupai Arc de Triomphe di Paris, menjadi landmark kota",
+                openHours: "24 Jam",
+                services: ["Selfie Spot", "Photography", "Historical Site"]
+            },
+            {
+                id: 18,
+                name: "Kedai Kopi Senja",
+                category: "food",
+                lat: -7.8710,
+                lng: 112.0160,
+                price: 30000,
+                rating: 4.5,
+                image: "https://images.unsplash.com/photo-1510903328575-b829631333c5?w=400",
+                description: "Kedai kopi dengan suasana cozy, ideal untuk bersantai di sore hari",
+                openHours: "14:00-23:00",
+                services: ["Manual Brew", "Light Snacks", "Outdoor Seating"]
+            },
+            {
+                id: 19,
+                name: "Tirta Yoga & Spa",
+                category: "spa",
+                lat: -7.8810,
+                lng: 112.0220,
+                price: 250000,
+                rating: 4.9,
+                image: "https://images.unsplash.com/photo-1549419137-a1e4d3a0e698?w=400",
+                description: "Kelas yoga dan layanan spa holistik",
+                openHours: "07:00-19:00",
+                services: ["Hatha Yoga", "Balinese Massage", "Sound Healing"]
+            },
+            {
+                id: 20,
+                name: "Coban Pelangi",
+                category: "tourism",
+                lat: -7.9050,
+                lng: 112.0650,
+                price: 10000,
+                rating: 4.3,
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0Y6E4D1t1y3sX4p7Kz8r8E4P7f9B7X2N3wA&s",
+                description: "Air terjun dengan pemandangan pelangi di pagi hari",
+                openHours: "08:00-16:00",
+                services: ["Waterfall View", "Natural Pool", "Hiking Trail"]
+            },
+            {
+                id: 21,
+                name: "Gado-Gado Bu Siti",
+                category: "food",
+                lat: -7.8740,
+                lng: 112.0130,
+                price: 18000,
+                rating: 4.6,
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7gL12qOQ5pQ0H8b-R7T0E_J7c0D8h8O9-wA&s",
+                description: "Gado-gado legendaris dengan bumbu kacang yang kaya rasa",
+                openHours: "10:00-17:00",
+                services: ["Gado-Gado", "Lontong", "Es Teh Manis"]
+            },
+            {
+                id: 22,
+                name: "Bukit Teletubbies",
+                category: "tourism",
+                lat: -7.8600,
+                lng: 112.0450,
+                price: 5000,
+                rating: 4.3,
+                image: "https://images.unsplash.com/photo-1588657476839-a79c94895c10?w=400",
+                description: "Bukit hijau dengan pemandangan kota, cocok untuk pendakian ringan",
+                openHours: "08:00-16:00",
+                services: ["Trekking", "View Point"]
+            },
+            {
+                id: 23,
+                name: "Candi Surowono",
+                category: "tourism",
+                lat: -7.9500,
+                lng: 112.0500,
+                price: 5000,
+                rating: 4.2,
+                image: "data:image/jpeg;base64,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"
+
+                description: "Situs bersejarah candi peninggalan kerajaan Majapahit",
+                openHours: "08:00-16:00",
+                services: ["Historical Site", "Photography", "Meditation Spot"]
+            }
+        ];
+
+        // User's current (simulated) location
+        const userLat = -7.8753; // Contoh: Koord sekitar Kediri
+        const userLng = 112.0150;
+
+        let currentPlaces = places;
+
+        // Utility: Calculate Distance (Haversine formula)
+        function getDistance(lat1, lon1, lat2, lon2) {
+            const R = 6371; // Radius of the earth in km
+            const dLat = (lat2 - lat1) * (Math.PI / 180);
+            const dLon = (lon2 - lon1) * (Math.PI / 180);
+            const a =
+                Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            const distance = R * c; // Distance in km
+            return distance;
+        }
+
+        // Utility: Format Rupiah
+        function formatRupiah(number) {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(number);
+        }
+
+        // --- Core Rendering Functions ---
+
+        // Function to create a skeleton loading card
+        function createSkeletonCard() {
+            return `
+                <div class="skeleton-card">
+                    <div class="skeleton-img"></div>
+                    <div class="skeleton-content">
+                        <div class="skeleton-line skeleton-title"></div>
+                        <div class="skeleton-line skeleton-short" style="width: 40%;"></div>
+                        <div class="skeleton-line" style="width: 90%;"></div>
+                        <div class="skeleton-line" style="width: 60%;"></div>
+                        <div class="card-footer" style="border: none; padding-top: 0;">
+                            <div class="skeleton-line skeleton-short" style="width: 30%;"></div>
+                            <div class="skeleton-line skeleton-short" style="width: 20%;"></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Function to render the places grid
+        function renderPlaces(placesToRender) {
+            const grid = document.getElementById('placesGrid');
+            const emptyState = document.getElementById('emptyState');
+            grid.innerHTML = '';
+
+            if (placesToRender.length === 0) {
+                emptyState.style.display = 'block';
+                return;
+            }
+
+            emptyState.style.display = 'none';
+
+            placesToRender.forEach((place, index) => {
+                const card = document.createElement('div');
+                card.className = 'place-card';
+                card.style.animationDelay = `${index * 0.1}s`;
+                card.setAttribute('onclick', `openModal(${place.id})`);
+
+                const categoryText = place.category === 'spa' ? 'Spa' : place.category === 'food' ? 'Kuliner' : 'Wisata';
+                const ratingColor = place.rating >= 4.7 ? '#0F8F6E' : place.rating >= 4.5 ? '#CFFFE0' : '#FFD700';
+
+                card.innerHTML = `
+                    <div class="card-image" style="background-image: url('${place.image}')">
+                        <button class="fav-btn" onclick="event.stopPropagation(); alert('Tempat favorit!')">
+                            <span style="color: white; font-size: 1.2rem;">♡</span>
+                        </button>
+                        <span class="category-badge">${categoryText}</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>${place.name}</h3>
+                        <div class="card-info">
+                            <div class="info-item" style="color: ${ratingColor};">
+                                <span style="font-size: 1rem;">⭐</span> ${place.rating}/5
+                            </div>
+                            <div class="info-item">
+                                <span style="font-size: 1rem;">📍</span> ${place.distance.toFixed(1)} km
+                            </div>
+                        </div>
+                        <p class="card-desc">${place.description}</p>
+                        <div class="card-footer">
+                            <span class="price">${formatRupiah(place.price)}</span>
+                            <span class="hours">
+                                <span style="font-size: 1rem;">🕐</span> ${place.openHours}
+                            </span>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // --- Filter and Search Logic ---
+
+        // Function to apply filters and render
+        function applyFilters(filteredPlaces) {
+            const radius = parseFloat(document.getElementById('radiusSlider').value);
+            const category = document.getElementById('categorySelect').value;
+            const budget = parseFloat(document.getElementById('budgetSlider').value);
+
+            let result = filteredPlaces.filter(place => {
+                const withinRadius = place.distance <= radius;
+                const matchesCategory = category === 'all' || place.category === category;
+                const withinBudget = place.price <= budget;
+                return withinRadius && matchesCategory && withinBudget;
+            });
+
+            currentPlaces = result;
+            renderPlaces(currentPlaces);
+        }
+
+        // Initial setup and filter calculation
+        function initPlaces() {
+            // 1. Calculate distance for all places
+            const placesWithDistance = places.map(place => ({
+                ...place,
+                distance: getDistance(userLat, userLng, place.lat, place.lng)
+            }));
+
+            // 2. Sort by distance (closest first)
+            placesWithDistance.sort((a, b) => a.distance - b.distance);
+
+            // 3. Initial render (applying default filters)
+            currentPlaces = placesWithDistance;
+            applyFilters(currentPlaces);
+        }
+
+        // Update filters on change
+        function updateFilters() {
+            // Update range slider labels
+            document.getElementById('radiusValue').textContent = `${document.getElementById('radiusSlider').value} km`;
+            document.getElementById('budgetValue').textContent = formatRupiah(parseFloat(document.getElementById('budgetSlider').value));
+
+            // Show loading skeletons temporarily
+            const grid = document.getElementById('placesGrid');
+            grid.innerHTML = createSkeletonCard() + createSkeletonCard() + createSkeletonCard();
+            document.getElementById('emptyState').style.display = 'none';
+
+            // Debounce the actual filtering process
+            clearTimeout(window.filterTimeout);
+            window.filterTimeout = setTimeout(() => {
+                applyFilters(currentPlaces);
+            }, 300);
+        }
+
+        // Handle search from mood buttons
+        function handleMoodSearch(mood) {
+            // Reset filters to default state for a fresh search
+            document.getElementById('radiusSlider').value = 10;
+            document.getElementById('categorySelect').value = 'all';
+            document.getElementById('budgetSlider').value = 1000000;
+            updateFilters();
+
+            // Open the AI panel and ask the question
+            toggleAIPanel(true);
+            const message = `Saya sedang merasa ${mood}. Tolong rekomendasikan tempat terbaik untuk saya!`;
+            document.getElementById('aiInput').value = message;
+            handleAISubmit();
+        }
+
+        // --- Modal Functions ---
+
+        function openModal(id) {
+            const place = places.find(p => p.id === id);
+            if (!place) return;
+
+            const overlay = document.getElementById('modalOverlay');
+
+            document.getElementById('modalTitle').textContent = place.name;
+            document.getElementById('modalRating').textContent = `${place.rating}/5`;
+            document.getElementById('modalDesc').textContent = place.description;
+            document.getElementById('modalDistance').textContent = place.distance ? `${place.distance.toFixed(1)} km dari lokasi Anda` : 'Jarak tidak diketahui';
+            document.getElementById('modalPrice').textContent = formatRupiah(place.price);
+            document.getElementById('modalHours').textContent = place.openHours;
+            document.getElementById('modalHeader').style.backgroundImage = `url('${place.image}')`;
+            document.getElementById('modalServices').innerHTML = place.services.map(service => `<span class="service-tag">${service}</span>`).join('');
+            document.getElementById('modalMailto').href = `https://www.google.com/search?q=${encodeURIComponent(place.name)}`;
+            document.getElementById('modalMailto').target = '_blank';
+
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(event) {
+            if (event && event.target.id !== 'modalOverlay') return;
+
+            document.getElementById('modalOverlay').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // --- AI Chat Functions (Mock) ---
+
+        function toggleAIPanel(forceOpen = false) {
+            const panel = document.getElementById('aiPanel');
+            if (forceOpen) {
+                panel.classList.add('active');
+            } else {
+                panel.classList.toggle('active');
+            }
+        }
+
+        function addAIMessage(sender, message) {
+            const messages = document.getElementById('aiMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `ai-message ${sender}`;
+            messageDiv.textContent = message;
+            messages.appendChild(messageDiv);
+            messages.scrollTop = messages.scrollHeight;
+
+            // Remove center guidance text
+            const centerText = messages.querySelector('div[style*="text-align: center"]');
+            if (centerText) {
+                centerText.style.display = 'none';
+            }
+        }
+
+        function showTypingIndicator() {
+            const messages = document.getElementById('aiMessages');
+            const indicator = document.createElement('div');
+            indicator.id = 'typingIndicator';
+            indicator.className = 'typing-indicator assistant';
+            indicator.innerHTML = `
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+            `;
+            messages.appendChild(indicator);
+            messages.scrollTop = messages.scrollHeight;
+            document.getElementById('aiSendBtn').disabled = true;
+        }
+
+        function removeTypingIndicator() {
+            const indicator = document.getElementById('typingIndicator');
+            if (indicator) {
+                indicator.remove();
+            }
+            document.getElementById('aiSendBtn').disabled = false;
+        }
+
+        // Function to simulate a call to a Gemini API
+        async function callGeminiAPI(userMessage) {
+            showTypingIndicator();
+
+            // Simulate API processing time
+            await new Promise(resolve => setTimeout(resolve, 2000));
+
+            // Demo response logic (since a real API key is not available)
+            try {
+                // In a real application, you would call the Gemini API here.
+                // For this demo, we use the filtering logic to simulate a relevant AI response.
+
+                const budget = formatRupiah(parseFloat(document.getElementById('budgetSlider').value));
+                const radius = parseFloat(document.getElementById('radiusSlider').value);
+                const category = document.getElementById('categorySelect').value;
+
+                let filterText = `Filter saat ini: Kategori: ${category === 'all' ? 'Semua' : category}, Radius: ${radius} km, Budget: ${budget}.`;
+
+                const sortedPlaces = currentPlaces.slice(0, 3); // Top 3 results from current filter
+
+                if (sortedPlaces.length > 0) {
+                    const demoText = sortedPlaces.map((p, i) => {
+                        const cat = p.category === 'spa' ? 'Spa' : p.category === 'food' ? 'Makanan' : 'Wisata';
+                        return `${i + 1}. **${p.name}**\n- Kategori: ${cat}\n- Jarak: ${p.distance.toFixed(1)} km\n- Harga: ${formatRupiah(p.price)}\n- Rating: ${p.rating}/5\n\n_${p.description}_`;
+                    }).join('\n\n');
+
+                    removeTypingIndicator();
+                    addAIMessage('assistant', `${filterText}\n\nSaya telah menganalisis permintaan Anda dan filter yang tersedia. Berdasarkan kebutuhan relaksasi, kuliner, atau wisata, berikut 3 rekomendasi terbaik di dekat Anda:\n\n${demoText}\n\nAnda dapat mengklik kartunya untuk melihat detail lebih lanjut!`);
+                } else {
+                    removeTypingIndicator();
+                    addAIMessage('assistant', `${filterText}\n\nMaaf, tidak ada tempat yang sesuai dengan kombinasi mood/filter Anda. Coba ubah kategori atau perbesar radius pencarian Anda.`);
+                }
+
+            } catch (error) {
+                // Fallback for API error simulation
+                const demoText = currentPlaces.slice(0, 3).map((p, i) => {
+                    const cat = p.category === 'spa' ? 'Spa' : p.category === 'food' ? 'Makanan' : 'Wisata';
+                    return `${i + 1}. ${p.name}\n- Kategori: ${cat}\n- Jarak: ${p.distance.toFixed(1)} km\n- Harga: Rp ${p.price.toLocaleString('id-ID')}\n- Rating: ${p.rating}/5\n\n${p.description}`;
+                }).join('\n\n');
+
+                removeTypingIndicator();
+                addAIMessage('assistant', `Maaf, terjadi kesalahan API. Pastikan API key Gemini sudah diisi dengan benar.\n\nSebagai demo, berikut rekomendasi berdasarkan filter Anda:\n\n${demoText}`);
+            }
+        }
+
+        // Handle AI Submit
+        function handleAISubmit() {
+            const input = document.getElementById('aiInput');
+            const message = input.value.trim();
+
+            if (!message) return;
+
+            addAIMessage('user', message);
+            input.value = '';
+
+            callGeminiAPI(message);
+        }
+
+        // Handle AI Key Press
+        function handleAIKeyPress(event) {
+            if (event.key === 'Enter') {
+                handleAISubmit();
+            }
+        }
+
+        // Close modal on ESC key
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape') {
+                closeModal();
+                if (document.getElementById('aiPanel').classList.contains('active')) {
+                    toggleAIPanel();
+                }
+            }
+        });
+
+        // Initialize on load
+        window.onload = initPlaces;
+
+    </script>
+</body>
+
+</html>
