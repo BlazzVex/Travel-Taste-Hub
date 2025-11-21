@@ -186,7 +186,7 @@
             box-shadow: 0 10px 30px rgba(15, 143, 110, 0.3);
         }
 
-        /* Filters */
+        /* Filters & Search */
         .filters {
             background: rgba(28, 58, 48, 0.5);
             backdrop-filter: blur(20px);
@@ -198,10 +198,51 @@
             animation: fadeInUp 0.8s 0.6s both;
         }
 
+        /* Search Bar Styles */
+        .search-container {
+            margin-bottom: 2rem;
+            position: relative;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .search-icon-wrapper {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #0F8F6E;
+            font-size: 1.2rem;
+            pointer-events: none;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            background: rgba(10, 30, 22, 0.8);
+            border: 2px solid #0F8F6E;
+            border-radius: 50px;
+            color: #CFFFE0;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            box-shadow: 0 0 15px rgba(15, 143, 110, 0.3);
+            background: rgba(10, 30, 22, 0.95);
+        }
+
+        .search-input::placeholder {
+            color: rgba(207, 255, 224, 0.5);
+        }
+
         .filter-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
+            margin-top: 2rem;
         }
 
         .filter-group {
@@ -720,48 +761,10 @@
                 grid-template-columns: 1fr;
             }
         }
-
-        /* Loading skeleton */
-        .skeleton-card {
-            background: rgba(28, 58, 48, 0.5);
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid rgba(15, 143, 110, 0.2);
-        }
-
-        .skeleton-img {
-            height: 200px;
-            background: linear-gradient(90deg, rgba(28, 58, 48, 0.5) 0%, rgba(15, 143, 110, 0.2) 50%, rgba(28, 58, 48, 0.5) 100%);
-            background-size: 200% 100%;
-            animation: shimmer 1.5s infinite;
-        }
-
-        .skeleton-content {
-            padding: 1.5rem;
-        }
-
-        .skeleton-line {
-            height: 12px;
-            background: linear-gradient(90deg, rgba(28, 58, 48, 0.5) 0%, rgba(15, 143, 110, 0.2) 50%, rgba(28, 58, 48, 0.5) 100%);
-            background-size: 200% 100%;
-            animation: shimmer 1.5s infinite;
-            border-radius: 4px;
-            margin-bottom: 0.5rem;
-        }
-
-        .skeleton-title {
-            height: 20px;
-            width: 70%;
-        }
-
-        .skeleton-short {
-            width: 50%;
-        }
     </style>
 </head>
 
 <body>
-    <!-- Header -->
     <header class="header">
         <div class="header-content">
             <div class="logo">
@@ -770,12 +773,10 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
     <div class="hero">
         <h1>Temukan Tempat Impianmu dengan AI</h1>
         <p>Spa, Kuliner, dan Wisata Terdekat dengan Rekomendasi Personal AI</p>
 
-        <!-- Mood Selector -->
         <div class="mood-selector">
             <button class="mood-btn" onclick="handleMoodSearch('stress')">😭 Stress</button>
             <button class="mood-btn" onclick="handleMoodSearch('santai')">😌 Santai</button>
@@ -784,8 +785,14 @@
             <button class="mood-btn" onclick="handleMoodSearch('jalan')">🧭 Jalan-jalan</button>
         </div>
 
-        <!-- Filters -->
         <div class="filters">
+            <div class="search-container">
+                <div class="search-icon-wrapper">
+                    <span>🔍</span>
+                </div>
+                <input type="text" id="searchInput" class="search-input" placeholder="Cari nama tempat atau aktivitas..." oninput="handleSearch(this.value)">
+            </div>
+
             <div class="filter-grid">
                 <div class="filter-group">
                     <label>Radius: <span class="range-value" id="radiusValue">10 km</span></label>
@@ -809,22 +816,18 @@
         </div>
     </div>
 
-    <!-- Places Grid -->
     <div class="places-grid" id="placesGrid"></div>
 
-    <!-- Empty State -->
     <div class="empty-state" id="emptyState" style="display: none;">
         <div style="font-size: 4rem; margin-bottom: 1rem;">📍</div>
         <h3>Tidak ada tempat yang sesuai</h3>
-        <p>Coba perluas radius pencarian atau tingkatkan budget Anda</p>
+        <p>Coba kata kunci lain, perluas radius pencarian, atau tingkatkan budget Anda</p>
     </div>
 
-    <!-- AI Chat Button -->
     <button class="ai-chat-btn" onclick="toggleAIPanel()">
         <span style="font-size: 2rem;">✨</span>
     </button>
 
-    <!-- AI Panel -->
     <div class="ai-panel" id="aiPanel">
         <div class="ai-header">
             <h3><span style="font-size: 1.5rem;">✨</span> AI Assistant</h3>
@@ -842,7 +845,6 @@
         </div>
     </div>
 
-    <!-- Modal -->
     <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
         <div class="modal-content" onclick="event.stopPropagation()">
             <button class="modal-close" onclick="closeModal()">×</button>
@@ -886,6 +888,7 @@
     </div>
 
     <script>
+
         // cek
         // Sample Places Data
         const places = [
